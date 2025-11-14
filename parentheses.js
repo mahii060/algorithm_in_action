@@ -27,17 +27,26 @@ const bracketChecker = (str) => {
 
     for (let i = 0; i < str.length; i++) {
         const char = str[i];
-        console.log(char);
+        // console.log(char);
 
         if (char === "(" || char === "{" || char === "[") {
             stack.push(char)
         }
         else if (char === ")" || char === "}" || char === "]") {
-            if (stack.isEmpty() || stack.pop() !== bracketMap[char]) {
+            if (stack.isEmpty()) {
+                return ({ message: "Stack is empty", status: false })
+            }
+            const expectedBracket = bracketMap[char];
+            const gottenBracket = stack.pop();
+
+            console.log(`Expected Bracket: ${bracketMap[char]}`, `Got this ${gottenBracket}`);
+
+            if (gottenBracket !== expectedBracket) {
                 return ({ message: "Invalid parentheses", status: false })
             }
         }
     }
     return { message: "Valid parentheses.", status: stack.isEmpty() }
 }
+console.log(bracketChecker("({[([{}])]})"));
 console.log(bracketChecker("({[([{[}])]})"));
