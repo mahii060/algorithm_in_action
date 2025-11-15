@@ -18,7 +18,7 @@ const isPalindromeTwoPointer = str => {
     let right = normalized.length - 1
     while (left < right) {
         if (normalized[left] !== normalized[right]) {
-           return false
+            return false
         }
         left++;
         right--;
